@@ -12,9 +12,9 @@ class BlogController extends Controller
         return Blog::all();
     }
 
-    public function show(Blog $article)
+    public function show(Blog $blog)
     {
-        return $article;
+        return $blog;
     }
 
     public function store(Request $request)
@@ -24,16 +24,16 @@ class BlogController extends Controller
         return response()->json($article, 201);
     }
 
-    public function update(Request $request, Blog $article)
+    public function update(Request $request, Blog $blog)
     {
-        $article->update($request->all());
+        $blog->update($request->all());
 
-        return response()->json($article, 200);
+        return response()->json($blog, 200);
     }
 
-    public function delete(Blog $article)
+    public function delete(Blog $blog)
     {
-        $article->delete();
+        $blog->delete();
 
         return response()->json(null, 204);
     }
