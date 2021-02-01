@@ -19,6 +19,7 @@ class BlogsTableSeeder extends Seeder
         for ($i = 0; $i < 50; $i++) {
             Blog::create([
                 'title' => $faker->sentence,
+                'des' => $faker->sentence,
                 'detail' => $faker->paragraph,
                 'category' => $faker->numberBetween(1,7),
                 'public' => $faker->numberBetween(0,1),

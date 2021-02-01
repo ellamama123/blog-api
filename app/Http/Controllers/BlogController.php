@@ -3,34 +3,58 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Blog;
+use App\Models\Blog as BlogApp;
 
 class BlogController extends Controller
 {
-    public function index()
+    // function show tất cả
+    public function index(Request $request)
     {
+        if(request()->input('title')){
+            return Blog::where('title', 'LIKE', '%'.request()->input('title').'%')->get();
+        }
         return Blog::all();
     }
 
+    // function tìm kiếm blog
     public function show(Blog $blog)
     {
         return $blog;
     }
 
+    // function thêm blog
     public function store(Request $request)
     {
-        $article = Blog::create($request->all());
+        $request->validate([
+            'title' => 'required',
+            'detail' => 'required',
+            'des' => 'required',
+            'category' => 'required',
+            'public' => 'required',
+            'data_pubblic'=>'required',
+        ]);
+        $article = Blog::create($request->only('title', 'detail','des','category','position','public','data_pubblic','thumbs'));
 
         return response()->json($article, 201);
     }
 
+    // function update blog
     public function update(Request $request, Blog $blog)
     {
-        $blog->update($request->all());
+        $request->validate([
+            'title' => 'required',
+            'detail' => 'required',
+            'des' => 'required',
+            'category' => 'required',
+            'public' => 'required',
+            'data_pubblic'=>'required',
+        ]);
+        $blog->update($request->only('title', 'detail','des','category','position','public','data_pubblic','thumbs'));
 
         return response()->json($blog, 200);
     }
 
+    // function delete blog
     public function delete(Blog $blog)
     {
         $blog->delete();
