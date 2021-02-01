@@ -18,8 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('blog', 'BlogController@index');
-Route::get('blog/{blog}', 'BlogController@show');
-Route::post('blog', 'BlogController@store');
-Route::put('blog/{blog}', 'BlogController@update');
-Route::delete('blog/{blog}', 'BlogController@delete');
+Route::resources('blog','BlogController');
